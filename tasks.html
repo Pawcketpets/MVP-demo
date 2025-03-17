@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPaw - Tasks</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between mb-6">
+            <h1 class="title mb-0">Tasks</h1>
+            <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-calendar-alt text-gray-500"></i>
+            </button>
+        </div>
+
+        <!-- Date Selector -->
+        <div class="mb-6">
+            <div class="flex-between mb-4">
+                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-chevron-left text-gray-500"></i>
+                </button>
+                <h2 class="text-lg font-semibold">Monday, 15 May</h2>
+                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-chevron-right text-gray-500"></i>
+                </button>
+            </div>
+            
+            <div class="flex space-x-4 overflow-x-auto pb-2 -mx-4 px-4">
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-pet-primary flex items-center justify-center text-white font-medium mb-1">15</div>
+                    <span class="text-xs">Mon</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">16</div>
+                    <span class="text-xs">Tue</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">17</div>
+                    <span class="text-xs">Wed</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">18</div>
+                    <span class="text-xs">Thu</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">19</div>
+                    <span class="text-xs">Fri</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">20</div>
+                    <span class="text-xs">Sat</span>
+                </div>
+                <div class="flex-shrink-0 w-12 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 font-medium mb-1">21</div>
+                    <span class="text-xs">Sun</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Categories -->
+        <div class="flex space-x-2 mb-6 overflow-x-auto pb-2 -mx-4 px-4">
+            <button class="flex-shrink-0 bg-pet-primary text-white rounded-full px-4 py-2 text-sm font-medium">All</button>
+            <button class="flex-shrink-0 bg-gray-100 text-gray-700 rounded-full px-4 py-2 text-sm font-medium">Feeding</button>
+            <button class="flex-shrink-0 bg-gray-100 text-gray-700 rounded-full px-4 py-2 text-sm font-medium">Medicine</button>
+            <button class="flex-shrink-0 bg-gray-100 text-gray-700 rounded-full px-4 py-2 text-sm font-medium">Exercise</button>
+            <button class="flex-shrink-0 bg-gray-100 text-gray-700 rounded-full px-4 py-2 text-sm font-medium">Grooming</button>
+        </div>
+
+        <!-- Morning Tasks -->
+        <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-500 mb-3">MORNING</h3>
+            
+            <!-- Task 1 -->
+            <div class="card mb-3">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-pills text-purple-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Morning Medicine</h3>
+                            <p class="text-sm text-gray-500">8:00 AM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                </div>
+            </div>
+            
+            <!-- Task 2 -->
+            <div class="card mb-3">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-green-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Breakfast</h3>
+                            <p class="text-sm text-gray-500">8:30 AM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-pet-primary border-2 border-pet-primary flex items-center justify-center">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Task 3 -->
+            <div class="card">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-walking text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Morning Walk</h3>
+                            <p class="text-sm text-gray-500">9:30 AM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-pet-primary border-2 border-pet-primary flex items-center justify-center">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Afternoon Tasks -->
+        <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-500 mb-3">AFTERNOON</h3>
+            
+            <!-- Task 1 -->
+            <div class="card mb-3">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-green-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Lunch</h3>
+                            <p class="text-sm text-gray-500">1:00 PM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-pet-primary border-2 border-pet-primary flex items-center justify-center">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Task 2 -->
+            <div class="card">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-walking text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Afternoon Walk</h3>
+                            <p class="text-sm text-gray-500">4:30 PM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evening Tasks -->
+        <div>
+            <h3 class="text-sm font-medium text-gray-500 mb-3">EVENING</h3>
+            
+            <!-- Task 1 -->
+            <div class="card mb-3">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-utensils text-green-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Dinner</h3>
+                            <p class="text-sm text-gray-500">6:30 PM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                </div>
+            </div>
+            
+            <!-- Task 2 -->
+            <div class="card mb-3">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-bath text-orange-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Bath Time</h3>
+                            <p class="text-sm text-gray-500">7:00 PM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                </div>
+            </div>
+            
+            <!-- Task 3 -->
+            <div class="card">
+                <div class="flex-between">
+                    <div class="flex-start">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-pills text-purple-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Evening Medicine</h3>
+                            <p class="text-sm text-gray-500">9:00 PM • Buddy</p>
+                        </div>
+                    </div>
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fixed bottom-24 right-4 w-14 h-14 bg-pet-primary rounded-full shadow-lg flex items-center justify-center">
+        <i class="fas fa-plus text-white text-xl"></i>
+    </button>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Profile</span>
+        </a>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="tasks.html" class="tab-item active">
+            <i class="fas fa-tasks tab-icon"></i>
+            <span>Tasks</span>
+        </a>
+        <a href="settings.html" class="tab-item">
+            <i class="fas fa-cog tab-icon"></i>
+            <span>Settings</span>
+        </a>
+    </div>
+</body>
+</html> 
