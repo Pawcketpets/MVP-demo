@@ -120,7 +120,7 @@
         .message-input-container {
             display: flex;
             align-items: center;
-            padding: 0.625rem 1rem;
+            padding: 0.625rem 0.5rem 0.625rem 1rem;
             background-color: white;
             border-top: 1px solid #DBDBDB;
             position: fixed;
@@ -136,7 +136,7 @@
             background-color: #EFEFEF;
             border-radius: 22px;
             padding: 0.5rem 0.75rem;
-            margin: 0 0.5rem;
+            margin: 0 0.75rem 0 0.5rem;
         }
         .message-input {
             flex: 1;
@@ -155,7 +155,9 @@
             font-weight: 600;
             color: #0095F6;
             font-size: 0.875rem;
-            padding: 0.25rem 0.5rem;
+            padding: 0.25rem 0;
+            margin-right: 0.5rem;
+            text-decoration: none;
         }
         .send-link.disabled {
             color: #B2DFFC;
@@ -171,14 +173,37 @@
             return urlParams.get(param);
         }
         
+        // Function to format username with proper capitalization and spacing
+        function formatUsername(username) {
+            // Map of usernames to their properly formatted versions
+            const nameMap = {
+                'emilywilson': 'Emily Wilson',
+                'davidchen': 'David Chen',
+                'sarahlee': 'Sarah Lee',
+                'michaelpark': 'Michael Park',
+                'thomaszhang': 'Thomas Zhang'
+            };
+            
+            // Return the mapped name if it exists
+            if (nameMap[username]) {
+                return nameMap[username];
+            }
+            
+            // Otherwise, apply basic formatting (capitalize first letter)
+            return username.charAt(0).toUpperCase() + username.slice(1);
+        }
+        
         // Update page when loaded
         window.onload = function() {
             // Get user and avatar from URL parameters
             const username = getUrlParam('user') || 'emilywilson';
             const avatarUrl = getUrlParam('avatar') || 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150';
             
+            // Format username for display
+            const displayName = formatUsername(username);
+            
             // Update page title
-            document.title = `Pawcket - Chat with ${username}`;
+            document.title = `Pawcket - Chat with ${displayName}`;
             
             // Update user avatar
             const avatarElements = document.querySelectorAll('.avatar');
@@ -189,7 +214,7 @@
             // Update username
             const usernameElements = document.querySelectorAll('.user-name');
             usernameElements.forEach(elem => {
-                elem.textContent = username;
+                elem.textContent = displayName;
             });
 
             // Load different chat messages based on username

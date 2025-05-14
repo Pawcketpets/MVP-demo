@@ -31,6 +31,11 @@
             font-size: 0.75rem;
             color: #6B7280;
         }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -48,13 +53,10 @@
     <div class="content">
         <!-- Header -->
         <div class="flex-between mb-6">
-            <div class="flex items-center">
-                <h1 class="title mb-0">Social</h1>
-                <button class="ml-2 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-cog text-purple-500 text-sm"></i>
-                </button>
+            <div class="flex items-center h-10">
+                <h1 class="header-title">Social</h1>
             </div>
-            <div class="flex">
+            <div class="flex items-center">
                 <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
                     <i class="fas fa-search text-gray-500"></i>
                 </button>
@@ -216,7 +218,7 @@
         </div>
         
         <!-- Floating Action Button -->
-        <div class="fixed bottom-20 right-4">
+        <div class="fixed bottom-28 right-4">
             <button class="w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
                 <i class="fas fa-plus text-white text-xl"></i>
             </button>
