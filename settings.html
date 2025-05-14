@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPaw - Settings</title>
+    <title>Pawcket - Settings</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -22,242 +22,115 @@
     <!-- Content Area -->
     <div class="content">
         <!-- Header -->
-        <div class="flex-between mb-6">
+        <div class="flex items-center mb-6">
+            <a href="home.html" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                <i class="fas fa-arrow-left text-gray-500"></i>
+            </a>
             <h1 class="title mb-0">Settings</h1>
         </div>
 
-        <!-- User Profile Section -->
-        <div class="card mb-6">
-            <div class="flex-between">
-                <div class="flex-start">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" 
-                         class="w-16 h-16 rounded-full object-cover mr-4">
-                    <div>
-                        <h2 class="text-lg font-semibold">Alex Johnson</h2>
-                        <p class="text-gray-500">alex.johnson@example.com</p>
-                        <button class="text-sm pet-primary font-medium mt-1">Edit Profile</button>
-                    </div>
+        <!-- User Card -->
+        <div class="card p-4 mb-6">
+            <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80" 
+                     class="w-14 h-14 rounded-full object-cover mr-4">
+                <div class="flex-grow">
+                    <h2 class="text-xl font-bold">Alex Johnson</h2>
+                    <p class="text-gray-500 text-sm">alex.johnson@example.com</p>
+                    <p class="text-sm text-red-500 mt-1">Edit Profile</p>
                 </div>
-                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
+                <i class="fas fa-chevron-right text-gray-400"></i>
             </div>
         </div>
-
+        
         <!-- General Settings -->
-        <div class="card mb-6">
-            <h3 class="subtitle">General</h3>
+        <div class="card p-4 mb-6">
+            <h3 class="text-lg font-bold mb-4">General</h3>
             
-            <!-- Language Setting -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+            <!-- Language -->
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-globe text-blue-500"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium">Language</h4>
+                        <p class="font-medium">Language</p>
                         <p class="text-sm text-gray-500">English (US)</p>
                     </div>
                 </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
+                <i class="fas fa-chevron-right text-gray-400"></i>
             </div>
             
-            <!-- Units Setting -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+            <!-- Units -->
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-ruler text-green-500"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium">Units</h4>
+                        <p class="font-medium">Units</p>
                         <p class="text-sm text-gray-500">Metric (kg, cm)</p>
                     </div>
                 </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
+                <i class="fas fa-chevron-right text-gray-400"></i>
             </div>
             
-            <!-- Theme Setting -->
-            <div class="flex-between py-3">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+            <!-- Dark Mode -->
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-moon text-purple-500"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium">Dark Mode</h4>
+                        <p class="font-medium">Dark Mode</p>
                         <p class="text-sm text-gray-500">Off</p>
                     </div>
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pet-primary"></div>
-                </label>
+                <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer"/>
+                    <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                </div>
             </div>
         </div>
-
-        <!-- Notifications Settings -->
-        <div class="card mb-6">
-            <h3 class="subtitle">Notifications</h3>
+        
+        <!-- Notifications -->
+        <div class="card p-4 mb-6">
+            <h3 class="text-lg font-bold mb-4">Notifications</h3>
             
             <!-- Task Reminders -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-bell text-red-500"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium">Task Reminders</h4>
+                        <p class="font-medium">Task Reminders</p>
                         <p class="text-sm text-gray-500">15 minutes before</p>
                     </div>
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer" checked>
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pet-primary"></div>
-                </label>
+                <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="toggle-tasks" id="toggle-tasks" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-purple-600 appearance-none cursor-pointer"/>
+                    <label for="toggle-tasks" class="toggle-label block overflow-hidden h-6 rounded-full bg-purple-600 cursor-pointer"></label>
+                </div>
             </div>
             
             <!-- Social Notifications -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-users text-blue-500"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium">Social Notifications</h4>
-                        <p class="text-sm text-gray-500">Likes, comments, and messages</p>
+                        <p class="font-medium">Social Notifications</p>
+                        <p class="text-sm text-gray-500">Comments, likes, and follows</p>
                     </div>
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer" checked>
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pet-primary"></div>
-                </label>
-            </div>
-            
-            <!-- Health Alerts -->
-            <div class="flex-between py-3">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-heartbeat text-green-500"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">Health Alerts</h4>
-                        <p class="text-sm text-gray-500">Abnormal health readings</p>
-                    </div>
+                <div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="toggle-social" id="toggle-social" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-purple-600 appearance-none cursor-pointer"/>
+                    <label for="toggle-social" class="toggle-label block overflow-hidden h-6 rounded-full bg-purple-600 cursor-pointer"></label>
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer" checked>
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pet-primary"></div>
-                </label>
             </div>
         </div>
-
-        <!-- Connected Devices -->
-        <div class="card mb-6">
-            <div class="flex-between mb-4">
-                <h3 class="subtitle mb-0">Connected Devices</h3>
-                <button class="text-sm font-medium pet-primary">Add Device</button>
-            </div>
-            
-            <!-- Device 1 -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-tag text-gray-500"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">Buddy's Smart Collar</h4>
-                        <p class="text-sm text-gray-500">Connected • Battery 78%</p>
-                    </div>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-cog text-gray-400"></i>
-                </button>
-            </div>
-            
-            <!-- Device 2 -->
-            <div class="flex-between py-3">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-camera text-gray-500"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">Pet Camera</h4>
-                        <p class="text-sm text-gray-500">Connected • Online</p>
-                    </div>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-cog text-gray-400"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Support & About -->
-        <div class="card mb-6">
-            <h3 class="subtitle">Support & About</h3>
-            
-            <!-- Help Center -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-question-circle text-yellow-500"></i>
-                    </div>
-                    <h4 class="font-medium">Help Center</h4>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
-            </div>
-            
-            <!-- Privacy Policy -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-shield-alt text-blue-500"></i>
-                    </div>
-                    <h4 class="font-medium">Privacy Policy</h4>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
-            </div>
-            
-            <!-- Terms of Service -->
-            <div class="flex-between py-3 border-b border-gray-100">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-file-contract text-blue-500"></i>
-                    </div>
-                    <h4 class="font-medium">Terms of Service</h4>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
-            </div>
-            
-            <!-- About -->
-            <div class="flex-between py-3">
-                <div class="flex-start">
-                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                        <i class="fas fa-info-circle text-gray-500"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-medium">About PetPaw</h4>
-                        <p class="text-sm text-gray-500">Version 1.0.0</p>
-                    </div>
-                </div>
-                <button class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Logout Button -->
-        <button class="w-full py-4 text-center text-red-500 font-medium bg-white rounded-lg shadow-sm mb-6">
-            Log Out
-        </button>
     </div>
 
     <!-- Tab Bar -->
@@ -268,19 +141,19 @@
         </a>
         <a href="profile.html" class="tab-item">
             <i class="fas fa-paw tab-icon"></i>
-            <span>Profile</span>
+            <span>My Pets</span>
+        </a>
+        <a href="match.html" class="tab-item">
+            <i class="fas fa-heart tab-icon"></i>
+            <span>Match</span>
         </a>
         <a href="social.html" class="tab-item">
             <i class="fas fa-users tab-icon"></i>
             <span>Social</span>
         </a>
-        <a href="tasks.html" class="tab-item">
-            <i class="fas fa-tasks tab-icon"></i>
-            <span>Tasks</span>
-        </a>
-        <a href="settings.html" class="tab-item active">
-            <i class="fas fa-cog tab-icon"></i>
-            <span>Settings</span>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
         </a>
     </div>
 </body>

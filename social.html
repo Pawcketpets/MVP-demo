@@ -7,6 +7,31 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .post-title {
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #111827;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .user-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+        .like-count {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Status Bar -->
@@ -23,7 +48,12 @@
     <div class="content">
         <!-- Header -->
         <div class="flex-between mb-6">
-            <h1 class="title mb-0">Social</h1>
+            <div class="flex items-center">
+                <h1 class="title mb-0">Social</h1>
+                <button class="ml-2 w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-cog text-purple-500 text-sm"></i>
+                </button>
+            </div>
             <div class="flex">
                 <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
                     <i class="fas fa-search text-gray-500"></i>
@@ -34,229 +64,164 @@
             </div>
         </div>
 
-        <!-- Segmented Control -->
+        <!-- Tabs -->
         <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
-            <button class="flex-1 py-2 rounded-lg bg-white shadow text-sm font-medium">Feed</button>
+            <button class="flex-1 py-2 rounded-lg bg-white shadow text-sm font-medium">Activity</button>
             <button class="flex-1 py-2 text-gray-500 text-sm font-medium">Nearby</button>
             <button class="flex-1 py-2 text-gray-500 text-sm font-medium">Events</button>
         </div>
 
-        <!-- Nearby Pets Horizontal Scroll -->
-        <div class="mb-6">
-            <div class="flex-between mb-3">
-                <h2 class="subtitle mb-0">Nearby Pets</h2>
-                <button class="text-sm font-medium pet-primary">See All</button>
-            </div>
-            
-            <div class="flex overflow-x-auto pb-2 -mx-4 px-4 space-x-4">
-                <!-- Nearby Pet 1 -->
-                <div class="flex-shrink-0 w-36 bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-full h-36 object-cover">
-                        <div class="absolute bottom-2 left-2 bg-white bg-opacity-90 rounded-full px-2 py-1 text-xs font-medium">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i>0.5 km
-                        </div>
-                    </div>
-                    <div class="p-2">
-                        <p class="font-medium text-sm">Max</p>
-                        <p class="text-xs text-gray-500">Pug • 2 years</p>
-                        <button class="mt-2 w-full bg-gray-100 rounded-full py-1 text-xs font-medium">Connect</button>
-                    </div>
-                </div>
-                
-                <!-- Nearby Pet 2 -->
-                <div class="flex-shrink-0 w-36 bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-full h-36 object-cover">
-                        <div class="absolute bottom-2 left-2 bg-white bg-opacity-90 rounded-full px-2 py-1 text-xs font-medium">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i>0.8 km
-                        </div>
-                    </div>
-                    <div class="p-2">
-                        <p class="font-medium text-sm">Luna</p>
-                        <p class="text-xs text-gray-500">Husky • 1 year</p>
-                        <button class="mt-2 w-full bg-gray-100 rounded-full py-1 text-xs font-medium">Connect</button>
-                    </div>
-                </div>
-                
-                <!-- Nearby Pet 3 -->
-                <div class="flex-shrink-0 w-36 bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1591946614720-90a587da4a36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-full h-36 object-cover">
-                        <div class="absolute bottom-2 left-2 bg-white bg-opacity-90 rounded-full px-2 py-1 text-xs font-medium">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i>1.2 km
-                        </div>
-                    </div>
-                    <div class="p-2">
-                        <p class="font-medium text-sm">Bella</p>
-                        <p class="text-xs text-gray-500">Beagle • 4 years</p>
-                        <button class="mt-2 w-full bg-gray-100 rounded-full py-1 text-xs font-medium">Connect</button>
-                    </div>
-                </div>
-                
-                <!-- Nearby Pet 4 -->
-                <div class="flex-shrink-0 w-36 bg-white rounded-lg shadow-sm overflow-hidden">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-full h-36 object-cover">
-                        <div class="absolute bottom-2 left-2 bg-white bg-opacity-90 rounded-full px-2 py-1 text-xs font-medium">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i>1.5 km
-                        </div>
-                    </div>
-                    <div class="p-2">
-                        <p class="font-medium text-sm">Charlie</p>
-                        <p class="text-xs text-gray-500">Labrador • 3 years</p>
-                        <button class="mt-2 w-full bg-gray-100 rounded-full py-1 text-xs font-medium">Connect</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Social Feed -->
-        <div>
-            <h2 class="subtitle">Feed</h2>
-            
+        <!-- Content Grid -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
             <!-- Post 1 -->
-            <div class="card mb-4">
-                <!-- Post Header -->
-                <div class="flex-between mb-3">
-                    <div class="flex-start">
-                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" 
-                             class="w-10 h-10 rounded-full object-cover mr-3">
-                        <div>
-                            <p class="font-medium">Alex Johnson</p>
-                            <p class="text-xs text-gray-500">2 hours ago</p>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <i class="fas fa-play-circle text-white text-xl"></i>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <p class="post-title">Buddy had an amazing time at the dog park today!</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Thomas Zhang</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-gray-400 mr-1 text-xs"></i>
+                            <span class="like-count">42</span>
                         </div>
                     </div>
-                    <button>
-                        <i class="fas fa-ellipsis-h text-gray-400"></i>
-                    </button>
-                </div>
-                
-                <!-- Post Content -->
-                <p class="mb-3">Buddy had an amazing time at the dog park today! Made some new friends and played fetch for hours. 🐕 #DogLife</p>
-                
-                <!-- Post Image -->
-                <div class="rounded-lg overflow-hidden mb-3">
-                    <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
-                         class="w-full h-48 object-cover">
-                </div>
-                
-                <!-- Post Actions -->
-                <div class="flex-between">
-                    <div class="flex">
-                        <button class="flex items-center mr-4">
-                            <i class="fas fa-heart text-red-500 mr-1"></i>
-                            <span class="text-sm">42</span>
-                        </button>
-                        <button class="flex items-center">
-                            <i class="fas fa-comment text-gray-400 mr-1"></i>
-                            <span class="text-sm">8</span>
-                        </button>
-                    </div>
-                    <button>
-                        <i class="fas fa-share-alt text-gray-400"></i>
-                    </button>
                 </div>
             </div>
             
             <!-- Post 2 -->
-            <div class="card mb-4">
-                <!-- Post Header -->
-                <div class="flex-between mb-3">
-                    <div class="flex-start">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" 
-                             class="w-10 h-10 rounded-full object-cover mr-3">
-                        <div>
-                            <p class="font-medium">Emily Wilson</p>
-                            <p class="text-xs text-gray-500">Yesterday</p>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/58997/pexels-photo-58997.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                </div>
+                <div class="p-2">
+                    <p class="post-title">Luna just got her new toy and she's absolutely loving it!</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Emily Wilson</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-gray-400 mr-1 text-xs"></i>
+                            <span class="like-count">28</span>
                         </div>
                     </div>
-                    <button>
-                        <i class="fas fa-ellipsis-h text-gray-400"></i>
-                    </button>
-                </div>
-                
-                <!-- Post Content -->
-                <p class="mb-3">Luna just got her new toy and she's absolutely loving it! Anyone else's pets obsessed with squeaky toys? 🐾</p>
-                
-                <!-- Post Image -->
-                <div class="rounded-lg overflow-hidden mb-3">
-                    <img src="https://images.unsplash.com/photo-1583511655826-05700442976d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
-                         class="w-full h-48 object-cover">
-                </div>
-                
-                <!-- Post Actions -->
-                <div class="flex-between">
-                    <div class="flex">
-                        <button class="flex items-center mr-4">
-                            <i class="far fa-heart text-gray-400 mr-1"></i>
-                            <span class="text-sm">28</span>
-                        </button>
-                        <button class="flex items-center">
-                            <i class="fas fa-comment text-gray-400 mr-1"></i>
-                            <span class="text-sm">5</span>
-                        </button>
-                    </div>
-                    <button>
-                        <i class="fas fa-share-alt text-gray-400"></i>
-                    </button>
                 </div>
             </div>
             
             <!-- Post 3 -->
-            <div class="card">
-                <!-- Post Header -->
-                <div class="flex-between mb-3">
-                    <div class="flex-start">
-                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" 
-                             class="w-10 h-10 rounded-full object-cover mr-3">
-                        <div>
-                            <p class="font-medium">Michael Brown</p>
-                            <p class="text-xs text-gray-500">2 days ago</p>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                </div>
+                <div class="p-2">
+                    <p class="post-title">My workspace setup for remote pet care monitoring</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">David Chen</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-gray-400 mr-1 text-xs"></i>
+                            <span class="like-count">2</span>
                         </div>
                     </div>
-                    <button>
-                        <i class="fas fa-ellipsis-h text-gray-400"></i>
-                    </button>
                 </div>
-                
-                <!-- Post Content -->
-                <p class="mb-3">Just found this amazing pet-friendly café downtown! They even have a special menu for dogs. Highly recommend for a weekend outing with your furry friend. ☕🐕</p>
-                
-                <!-- Post Image -->
-                <div class="rounded-lg overflow-hidden mb-3">
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
-                         class="w-full h-48 object-cover">
-                </div>
-                
-                <!-- Post Actions -->
-                <div class="flex-between">
-                    <div class="flex">
-                        <button class="flex items-center mr-4">
-                            <i class="far fa-heart text-gray-400 mr-1"></i>
-                            <span class="text-sm">56</span>
-                        </button>
-                        <button class="flex items-center">
-                            <i class="fas fa-comment text-gray-400 mr-1"></i>
-                            <span class="text-sm">12</span>
-                        </button>
+            </div>
+            
+            <!-- Post 4 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <i class="fas fa-play-circle text-white text-xl"></i>
                     </div>
-                    <button>
-                        <i class="fas fa-share-alt text-gray-400"></i>
-                    </button>
+                </div>
+                <div class="p-2">
+                    <p class="post-title">Found this beautiful spot for hiking with my dog!</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Sarah Lee</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-red-500 mr-1 text-xs"></i>
+                            <span class="like-count">87</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 5 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                </div>
+                <div class="p-2">
+                    <p class="post-title">Coco's first day at the pet spa 🛁</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Jessica Taylor</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-gray-400 mr-1 text-xs"></i>
+                            <span class="like-count">15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 6 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="relative">
+                    <img src="https://images.pexels.com/photos/3196887/pexels-photo-3196887.jpeg?auto=compress&cs=tinysrgb&w=500" 
+                         class="w-full h-40 object-cover">
+                    <div class="absolute top-2 right-2">
+                        <i class="fas fa-play-circle text-white text-xl"></i>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <p class="post-title">Morning walk routine with Max 🐕</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center">
+                            <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                 class="w-6 h-6 rounded-full object-cover mr-1">
+                            <span class="user-name">Michael Park</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-gray-400 mr-1 text-xs"></i>
+                            <span class="like-count">32</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Floating Action Button -->
+        <div class="fixed bottom-20 right-4">
+            <button class="w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
+                <i class="fas fa-plus text-white text-xl"></i>
+            </button>
+        </div>
     </div>
-
-    <!-- Floating Action Button -->
-    <button class="fixed bottom-24 right-4 w-14 h-14 bg-pet-primary rounded-full shadow-lg flex items-center justify-center">
-        <i class="fas fa-plus text-white text-xl"></i>
-    </button>
 
     <!-- Tab Bar -->
     <div class="tab-bar">
@@ -266,19 +231,19 @@
         </a>
         <a href="profile.html" class="tab-item">
             <i class="fas fa-paw tab-icon"></i>
-            <span>Profile</span>
+            <span>My Pets</span>
+        </a>
+        <a href="match.html" class="tab-item">
+            <i class="fas fa-heart tab-icon"></i>
+            <span>Match</span>
         </a>
         <a href="social.html" class="tab-item active">
             <i class="fas fa-users tab-icon"></i>
             <span>Social</span>
         </a>
-        <a href="tasks.html" class="tab-item">
-            <i class="fas fa-tasks tab-icon"></i>
-            <span>Tasks</span>
-        </a>
-        <a href="settings.html" class="tab-item">
-            <i class="fas fa-cog tab-icon"></i>
-            <span>Settings</span>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
         </a>
     </div>
 </body>
