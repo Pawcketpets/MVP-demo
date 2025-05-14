@@ -1,5 +1,14 @@
 /* Common styles for PetPaw app */
 
+/* Global styles to fix scrolling issues */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f5f5f7;
+}
+
 /* Status bar styling */
 .status-bar {
     height: 44px;
@@ -27,6 +36,7 @@
     left: 0;
     right: 0;
     padding-bottom: 20px; /* For iPhone home indicator */
+    z-index: 1000; /* Ensure tab bar stays on top */
 }
 
 .tab-item {
@@ -51,9 +61,11 @@
 /* Content area */
 .content {
     padding: 16px;
-    padding-bottom: 100px; /* Space for tab bar */
-    height: calc(100vh - 44px - 83px);
+    padding-bottom: 103px; /* Space for tab bar */
+    min-height: calc(100vh - 44px); /* Full viewport height minus status bar */
     overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
 }
 
 /* Card styling */
