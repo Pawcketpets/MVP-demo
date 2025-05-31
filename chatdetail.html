@@ -181,16 +181,13 @@
                 'davidchen': 'David Chen',
                 'sarahlee': 'Sarah Lee',
                 'michaelpark': 'Michael Park',
-                'thomaszhang': 'Thomas Zhang'
+                'thomaszhang': 'Thomas Zhang',
+                'vetclinicedmonton': 'VetClinic Edmonton',
+                'edmontondogwalkers': 'Edmonton Dog Walkers'
             };
             
             // Return the mapped name if it exists
-            if (nameMap[username]) {
-                return nameMap[username];
-            }
-            
-            // Otherwise, apply basic formatting (capitalize first letter)
-            return username.charAt(0).toUpperCase() + username.slice(1);
+            return nameMap[username] || username.charAt(0).toUpperCase() + username.slice(1);
         }
         
         // Update page when loaded
@@ -268,6 +265,30 @@
                     { type: 'received', text: 'A golden retriever! She\'s 8 weeks old and so energetic.', time: 'Sunday, 4:10 PM' },
                     { type: 'sent', text: 'They\'re wonderful dogs! For training, start with simple commands and be consistent.', time: 'Sunday, 4:15 PM' },
                     { type: 'received', text: 'Thanks for the advice! I\'m going to start training today. Any specific tips for a first-time dog owner?', time: '8:45 AM' }
+                ],
+                'vetclinicedmonton': [
+                    { type: 'received', text: 'Hello! This is VetClinic Edmonton. We\'re sending a reminder about Buddy\'s upcoming annual checkup.', time: 'Friday, 9:30 AM' },
+                    { type: 'sent', text: 'Thanks for the reminder. What day is it scheduled for?', time: 'Friday, 9:45 AM' },
+                    { type: 'received', text: 'Buddy\'s appointment is scheduled for May 22nd at 2:30 PM. Please arrive 15 minutes early to complete any paperwork.', time: 'Friday, 10:00 AM' },
+                    { type: 'sent', text: 'Got it. Do I need to bring anything special for this visit?', time: 'Friday, 10:15 AM' },
+                    { type: 'received', text: 'Please bring Buddy\'s vaccination records if you have them. Also, we recommend bringing a favorite toy to help keep him comfortable.', time: 'Friday, 10:30 AM' },
+                    { type: 'sent', text: 'Will Dr. Wilson be seeing him again? Buddy really liked her last time.', time: 'Friday, 3:30 PM' },
+                    { type: 'received', text: 'Yes, Dr. Wilson will be conducting the checkup. She\'s looking forward to seeing Buddy\'s progress!', time: 'Friday, 4:15 PM' },
+                    { type: 'received', text: 'Your appointment for Buddy\'s annual checkup is confirmed for May 22nd at 2:30 PM. Please arrive 15 minutes early.', time: 'Yesterday, 9:15 AM' },
+                    { type: 'sent', text: 'Thanks for confirming. I\'ll make sure to be there early.', time: 'Yesterday, 10:30 AM' }
+                ],
+                'edmontondogwalkers': [
+                    { type: 'received', text: 'Hi there! This is Edmonton Dog Walkers. We wanted to let you know about our new extended walking hours for the summer season.', time: 'May 8, 3:15 PM' },
+                    { type: 'sent', text: 'That sounds great! What are the new hours?', time: 'May 8, 3:30 PM' },
+                    { type: 'received', text: 'We now offer walks from 6 AM to 8 PM, 7 days a week. We\'ve also added a new walker, Jake, who specializes in high-energy breeds.', time: 'May 8, 3:45 PM' },
+                    { type: 'sent', text: 'My dog Buddy is very energetic. Would Jake be a good match for him?', time: 'May 8, 4:00 PM' },
+                    { type: 'received', text: 'Definitely! Jake has experience with many high-energy breeds like Border Collies and Huskies. He focuses on both exercise and mental stimulation.', time: 'May 8, 4:15 PM' },
+                    { type: 'sent', text: 'That sounds perfect for Buddy. How can I schedule a walk with Jake?', time: 'May 8, 4:30 PM' },
+                    { type: 'received', text: 'We\'ve added a new dog walker in your area who specializes in high-energy breeds. Would you like to schedule a meet & greet?', time: 'Yesterday, 11:30 AM' },
+                    { type: 'sent', text: 'Yes, I\'d love to! When is Jake available for a meet & greet?', time: 'Yesterday, 12:15 PM' },
+                    { type: 'received', text: 'Jake is available this Saturday between 10 AM and 2 PM. Would any time in that window work for you and Buddy?', time: 'Yesterday, 1:30 PM' },
+                    { type: 'sent', text: 'Saturday at 11 AM would work well for us. Where should we meet?', time: '9:15 AM' },
+                    { type: 'received', text: 'Great! Let\'s meet at Riverside Dog Park at 11 AM on Saturday. Jake will bring his ID badge and dog treats. See you then!', time: '9:45 AM' }
                 ]
             };
 

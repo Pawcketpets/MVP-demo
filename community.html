@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100%;
+            position: relative;
+            background-color: #f5f5f7;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .post-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 8px;
+            padding: 0;
+            max-width: 100%;
+        }
+        .post-header {
+            display: flex;
+            padding: 8px 12px 2px;
+            align-items: center;
+        }
+        .user-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 6px;
+        }
+        .post-meta {
+            flex: 1;
+        }
+        .user-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1A1A1B;
+            margin-right: 4px;
+        }
+        .post-time {
+            font-size: 0.65rem;
+            color: #787C7E;
+            display: inline-block;
+        }
+        .post-options {
+            color: #787C7E;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .post-content {
+            padding: 0px 12px 6px;
+        }
+        .post-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.2;
+            color: #222;
+            margin: 2px 0;
+        }
+        .post-excerpt {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            color: #444;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .topic-tag {
+            font-size: 0.65rem;
+            padding: 1px 8px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-right: 6px;
+            display: inline-block;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .tag-emergency {
+            background-color: #FF4500;
+        }
+        .tag-lost {
+            background-color: #FF9248;
+        }
+        .tag-knowledge {
+            background-color: #0079D3;
+        }
+        .tag-adoption {
+            background-color: #46D160;
+        }
+        .tag-help {
+            background-color: #8D58E2;
+        }
+        .tag-discussion {
+            background-color: #3D5AF1;
+        }
+        .tag-training {
+            background-color: #00A478;
+        }
+        .tag-grooming {
+            background-color: #FF66AC;
+        }
+        .tag-feeding {
+            background-color: #AB7C57;
+        }
+        .tag-shows {
+            background-color: #F06292;
+        }
+        .tag-accessories {
+            background-color: #FFB900;
+        }
+        .post-actions {
+            display: flex;
+            padding: 2px 12px;
+            border-top: 1px solid #EDEFF1;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .vote-controls {
+            display: none;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            color: #878A8C;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px 8px;
+            margin-right: 8px;
+        }
+        
+        .action-btn i {
+            margin-right: 4px;
+            font-size: 14px;
+        }
+        
+        .action-btn:hover {
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        .category-list {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            font-weight: 500;
+        }
+        .category-item:last-child {
+            border-bottom: none;
+        }
+        .category-item.active {
+            color: #4F46E5;
+            background-color: rgba(79, 70, 229, 0.05);
+            border-left: 3px solid #4F46E5;
+        }
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .icon-emergency {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
+        .icon-lost {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+        .icon-knowledge {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+        .icon-adoption {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+        .icon-help {
+            background-color: #E0E7FF;
+            color: #4F46E5;
+        }
+        .search-bar {
+            background-color: white;
+            border-radius: 999px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 8px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .search-input {
+            border: none;
+            flex-grow: 1;
+            padding: 4px 0;
+            outline: none;
+            font-size: 14px;
+        }
+        .tab-container {
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-buttons {
+            display: flex;
+            white-space: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0;
+            position: relative;
+        }
+        .tab-buttons::-webkit-scrollbar {
+            display: none;
+            height: 0;
+        }
+        .tab-btn {
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+        .tab-btn.active {
+            color: #0079D3;
+            border-bottom: 2px solid #0079D3;
+            font-weight: 600;
+        }
+        .tab-btn:hover:not(.active) {
+            color: #0079D3;
+            background-color: rgba(0, 121, 211, 0.05);
+        }
+        
+        /* 添加左右渐变阴影提示可滚动 */
+        .tab-container:before,
+        .tab-container:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .tab-container:before {
+            left: 0;
+            background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+        
+        .tab-container:after {
+            right: 0;
+            background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .category-count {
+            margin-left: auto;
+            background-color: #f0f0f0;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .category-all {
+            background-color: #4F46E5;
+            color: white;
+        }
+        /* Fix for bottom white space */
+        .community-container {
+            min-height: calc(100vh - 180px); /* Accounts for header and tab bar */
+            padding: 0;
+        }
+        .divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 8px 0;
+        }
+        /* Main content section */
+        .main-content {
+            width: 100%;
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+        /* Floating action button */
+        .floating-btn {
+            position: fixed;
+            bottom: 112px; /* 28*4=112px 转换tailwind的bottom-28 */
+            right: 16px; /* 4*4=16px 转换tailwind的right-4 */
+            z-index: 9999;
+        }
+        
+        .action-button {
+            width: 56px; /* 14*4=56px 转换tailwind的w-14 */
+            height: 56px; /* 14*4=56px 转换tailwind的h-14 */
+            border-radius: 50%;
+            background-color: #8B5CF6; /* purple-500 颜色 */
+            color: white;
+            font-size: 20px; /* text-xl */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .action-button i {
+            margin-top: 0;
+        }
+        /* 确保内容一致性 */
+        .content {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header -->
+        <div class="flex-between px-2 mb-4">
+            <div class="flex items-center h-10">
+                <h1 class="header-title">Community</h1>
+            </div>
+            <div class="flex items-center">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="fas fa-plus text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="px-2">
+            <div class="search-bar">
+                <i class="fas fa-search text-gray-400 mr-2"></i>
+                <input type="text" placeholder="Search posts" class="search-input">
+            </div>
+        </div>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-container">
+            <div class="tab-buttons" id="tabButtons">
+                <div class="tab-btn active">All</div>
+                <div class="tab-btn">Emergency</div>
+                <div class="tab-btn">Lost Pets</div>
+                <div class="tab-btn">Knowledge</div>
+                <div class="tab-btn">Adoption</div>
+                <div class="tab-btn">Help</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Posts will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Floating Action Button (outside of content div) -->
+    <div class="floating-btn">
+        <button class="action-button">
+            <i class="fas fa-plus text-white text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="community.html" class="tab-item active">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Community</span>
+        </a>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="chat.html" class="tab-item">
+            <i class="fas fa-comment tab-icon"></i>
+            <span>Chat</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <script>
+        // 在页面加载时立即调用函数加载所有帖子
+        window.onload = function() {
+            loadAllPosts();
+        };
+        
+        // 添加选项卡水平滑动功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.getElementById('tabButtons');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            // 初始加载所有帖子
+            loadAllPosts();
+
+            tabButtons.addEventListener('mousedown', (e) => {
+                isDown = true;
+                tabButtons.classList.add('active');
+                startX = e.pageX - tabButtons.offsetLeft;
+                scrollLeft = tabButtons.scrollLeft;
+            });
+
+            tabButtons.addEventListener('mouseleave', () => {
+                isDown = false;
+                tabButtons.classList.remove('active');
+            });
+
+            tabButtons.addEventListener('mouseup', () => {
+                isDown = false;
+                tabButtons.classList.remove('active');
+            });
+
+            tabButtons.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - tabButtons.offsetLeft;
+                const walk = (x - startX) * 2;
+                tabButtons.scrollLeft = scrollLeft - walk;
+            });
+
+            // 触摸事件支持
+            tabButtons.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - tabButtons.offsetLeft;
+                scrollLeft = tabButtons.scrollLeft;
+            }, { passive: true });
+
+            tabButtons.addEventListener('touchend', () => {
+                isDown = false;
+            }, { passive: true });
+
+            tabButtons.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                const x = e.touches[0].pageX - tabButtons.offsetLeft;
+                const walk = (x - startX) * 2;
+                tabButtons.scrollLeft = scrollLeft - walk;
+            }, { passive: true });
+            
+            // 添加选项卡切换功能
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 移除所有选项卡的active类
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // 为当前点击的选项卡添加active类
+                    tab.classList.add('active');
+                    
+                    // 获取选中的类别
+                    const category = tab.textContent.trim();
+                    
+                    // 直接加载对应分类的内容，无需loading状态
+                    if (category === 'All') {
+                        // 重新加载所有帖子
+                        loadAllPosts();
+                    } else {
+                        // 加载特定分类的帖子
+                        loadCategoryPosts(category);
+                    }
+                });
+            });
+            
+            // 加载所有帖子的函数
+            function loadAllPosts() {
+                const mainContent = document.querySelector('.main-content');
+                // 保持一致的样式和布局
+                document.body.style.maxWidth = '100%';
+                document.body.style.overflowX = 'hidden';
+                mainContent.style.width = '100%';
+                mainContent.style.padding = '0 8px';
+                mainContent.style.boxSizing = 'border-box';
+                
+                // 加载内容
+                mainContent.innerHTML = document.querySelector('#allPostsTemplate').innerHTML;
+            }
+            
+            // 加载特定分类帖子的函数
+            function loadCategoryPosts(category) {
+                const mainContent = document.querySelector('.main-content');
+                // 确保主内容区域的样式一致
+                document.body.style.maxWidth = '100%';
+                document.body.style.overflowX = 'hidden';
+                mainContent.style.width = '100%';
+                mainContent.style.padding = '0 8px';
+                mainContent.style.boxSizing = 'border-box';
+                
+                // 根据类别生成不同的帖子内容
+                let postsHTML;
+                
+                if (category === 'Emergency') {
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">Thomas_Zhang</span>
+                                    <span class="post-time">18m</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">What to do if your dog eats chocolate?</h3>
+                                <p class="post-excerpt">My 2-year-old Labrador just ate about 100g of dark chocolate. Should I make him vomit or take him to an emergency vet?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>42</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>14</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>8</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">Sarah_Johnson</span>
+                                    <span class="post-time">45m</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Cat bleeding after fight with neighbor's dog</h3>
+                                <p class="post-excerpt">My cat got into a fight with my neighbor's dog and is bleeding from his ear. The vet is closed. What should I do?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>23</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>7</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>2</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">PetLover44</span>
+                                    <span class="post-time">2h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Puppy not eating or drinking for 24 hours</h3>
+                                <p class="post-excerpt">My 3-month-old puppy hasn't eaten or drunk anything in the last 24 hours and seems lethargic. Is this an emergency?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>56</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>18</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>5</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (category === 'Lost Pets') {
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">David_Chen</span>
+                                    <span class="post-time">26m</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">MISSING: Orange tabby cat in Oliver area</h3>
+                                <p class="post-excerpt">My cat Leo went missing yesterday near 104 St and Jasper Ave. He's an orange tabby with a white chest and green collar.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>17</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>5</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>3</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">EmmaWilson</span>
+                                    <span class="post-time">3h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Missing Golden Retriever in Central Park</h3>
+                                <p class="post-excerpt">My Golden Retriever Max ran away during our walk in Central Park. He's wearing a blue collar with my contact info.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>32</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>11</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>15</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">JacksonBrown</span>
+                                    <span class="post-time">1d</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">FOUND: Small white poodle near Main Street</h3>
+                                <p class="post-excerpt">Found a small white poodle wandering near Main Street and 5th Avenue. No collar but seems well-groomed. Contact me if it's yours.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>47</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>9</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>21</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (category === 'Knowledge') {
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">Organic-Today5966</span>
+                                    <span class="post-time">1h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Understanding dog body language: A complete guide</h3>
+                                <p class="post-excerpt">I've put together a comprehensive guide on how to read your dog's body language. From tail positions to ear movements.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>128</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>32</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>24</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">VetDrSmith</span>
+                                    <span class="post-time">5h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">The truth about grain-free diets for pets</h3>
+                                <p class="post-excerpt">As a veterinarian, I want to explain the pros and cons of grain-free diets and recent studies linking them to heart issues in dogs.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>195</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>47</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>36</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">CatBehaviorist</span>
+                                    <span class="post-time">2d</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Why cats knead and what it means</h3>
+                                <p class="post-excerpt">Ever wonder why your cat "makes biscuits" on your lap? Here's a breakdown of kneading behavior and what your cat is trying to tell you.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>243</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>58</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>41</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (category === 'Adoption') {
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">ShelterVolunteer</span>
+                                    <span class="post-time">3h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">3 beautiful kittens looking for forever homes</h3>
+                                <p class="post-excerpt">We have 3 kittens (8 weeks old) ready for adoption. All vaccinated and dewormed. Very playful and good with children.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>87</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>29</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>15</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">RescueCenter</span>
+                                    <span class="post-time">1d</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Senior dog needs loving home - adoption fee waived</h3>
+                                <p class="post-excerpt">Max is a 12-year-old golden retriever whose owner passed away. He's gentle, housebroken and great with other pets.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>156</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>34</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>42</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">PetAdoptionAgency</span>
+                                    <span class="post-time">2d</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Adoption event this weekend at Central Park</h3>
+                                <p class="post-excerpt">We're hosting a big adoption event this Saturday from 10am-4pm. Over 30 dogs and cats looking for homes.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>112</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>47</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>65</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (category === 'Help') {
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">FirstTimePetOwner</span>
+                                    <span class="post-time">4h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">How to stop puppy from chewing furniture?</h3>
+                                <p class="post-excerpt">My 4-month-old Lab puppy is destroying my couch. I've tried bitter spray but it doesn't work. Any advice?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>34</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>28</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>3</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">CatMomOf3</span>
+                                    <span class="post-time">7h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Need advice on introducing new cat to resident cats</h3>
+                                <p class="post-excerpt">I'm adopting a 2-year-old cat tomorrow and I already have 2 cats at home. What's the best way to introduce them without stress?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>42</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>19</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>5</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">DogDaddy</span>
+                                    <span class="post-time">1d</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Recommended groomer for anxious dog?</h3>
+                                <p class="post-excerpt">My Border Collie gets extremely anxious at the groomer. Can anyone recommend a patient groomer who's good with anxious dogs?</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>27</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>31</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>2</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // 其他类别显示默认内容
+                    postsHTML = `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">Thomas_Zhang</span>
+                                    <span class="post-time">18m</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Latest ${category} post</h3>
+                                <p class="post-excerpt">This is a sample post for the ${category} category. In a real app, this would be loaded from a database.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>42</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>14</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>8</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">Sarah_Johnson</span>
+                                    <span class="post-time">45m</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Another ${category} related question</h3>
+                                <p class="post-excerpt">Has anyone dealt with this ${category} situation before? Looking for advice from experienced pet owners.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>23</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>7</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>2</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                    class="user-avatar">
+                                <div class="post-meta">
+                                    <span class="user-name">PetExpert88</span>
+                                    <span class="post-time">3h</span>
+                                </div>
+                                <div class="post-options">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="post-content">
+                                <h3 class="post-title">Pro tips for ${category} category</h3>
+                                <p class="post-excerpt">After 5 years of experience with pets, here are my top 3 tips for dealing with ${category} related issues that every pet owner should know.</p>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <div class="action-btn">
+                                    <i class="far fa-thumbs-up"></i>
+                                    <span>67</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>19</span>
+                                </div>
+                                
+                                <div class="action-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>11</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // 更新主内容区域
+                mainContent.innerHTML = postsHTML;
+            }
+        });
+    </script>
+    
+    <!-- 保存所有帖子的模板 -->
+    <template id="allPostsTemplate">
+        <!-- Post 1 -->
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                     class="user-avatar">
+                <div class="post-meta">
+                    <span class="user-name">Thomas_Zhang</span>
+                    <span class="post-time">18m</span>
+                </div>
+                <div class="post-options">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <h3 class="post-title">What to do if your dog eats chocolate? Need urgent advice!</h3>
+                <div class="topic-tag tag-emergency">Emergency</div>
+                
+                <p class="post-excerpt">My 2-year-old Labrador just ate about 100g of dark chocolate. Should I make him vomit or take him to an emergency vet?</p>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-btn">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>42</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-comment-alt"></i>
+                    <span>14</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-share-square"></i>
+                    <span>8</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Post 2 -->
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                     class="user-avatar">
+                <div class="post-meta">
+                    <span class="user-name">David_Chen</span>
+                    <span class="post-time">26m</span>
+                </div>
+                <div class="post-options">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <h3 class="post-title">MISSING: Orange tabby cat in Oliver area</h3>
+                <div class="topic-tag tag-lost">Lost Pet</div>
+                
+                <p class="post-excerpt">My cat Leo went missing yesterday near 104 St and Jasper Ave. He's an orange tabby with a white chest and green collar.</p>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-btn">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>17</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-comment-alt"></i>
+                    <span>5</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-share-square"></i>
+                    <span>3</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Post 3 -->
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                     class="user-avatar">
+                <div class="post-meta">
+                    <span class="user-name">Organic-Today5966</span>
+                    <span class="post-time">1h</span>
+                </div>
+                <div class="post-options">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <h3 class="post-title">Understanding dog body language: A complete guide</h3>
+                <div class="topic-tag tag-knowledge">Knowledge</div>
+                
+                <p class="post-excerpt">I've put together a comprehensive guide on how to read your dog's body language. From tail positions to ear movements.</p>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action-btn">
+                    <i class="far fa-thumbs-up"></i>
+                    <span>128</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-comment-alt"></i>
+                    <span>32</span>
+                </div>
+                
+                <div class="action-btn">
+                    <i class="far fa-share-square"></i>
+                    <span>24</span>
+                </div>
+            </div>
+        </div>
+    </template>
+</body>
+</html> 
