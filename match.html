@@ -7,6 +7,94 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .header-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+        
+        .header-link:hover {
+            color: #8B5CF6;
+        }
+        
+        .header-link-arrow {
+            margin-right: 6px;
+            font-size: 16px;
+            color: #8B5CF6;
+        }
+        
+        .pet-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .action-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .action-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .match-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #FEF2F2;
+            color: #EF4444;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .owner-info {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 4px 8px 4px 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .owner-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            margin-right: 6px;
+        }
+        
+        .owner-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4B5563;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Status Bar -->
@@ -20,19 +108,16 @@
     </div>
 
     <!-- Content Area -->
-    <div class="content">
+    <div class="content px-4 pb-24 pt-4">
         <!-- Header -->
         <div class="flex-between mb-6">
-            <div class="flex items-baseline">
-                <h1 class="title mb-0">Bella</h1>
-                <div class="ml-2 bg-purple-100 text-purple-600 text-xs font-medium rounded-full px-3 py-1" style="transform: translateY(-4px);">Owner</div>
-            </div>
             <div class="flex items-center">
-                <a href="social.html" class="mr-2">
-                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-camera text-purple-500"></i>
-                    </button>
+                <a href="social.html" class="header-link">
+                    <i class="fas fa-chevron-left header-link-arrow"></i>
+                    <h1 class="text-2xl font-bold">Matching</h1>
                 </a>
+            </div>
+            <div>
                 <button class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-cog text-purple-500"></i>
                 </button>
@@ -40,53 +125,58 @@
         </div>
 
         <!-- Pet Card (Swipeable) -->
-        <div class="relative bg-white rounded-2xl shadow-md mb-6 overflow-hidden">
+        <div class="pet-card bg-white mb-6">
             <!-- Pet Image -->
-            <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
-                 class="w-full h-96 object-cover">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                     class="w-full h-80 object-cover">
+                     
+                <!-- Owner Info -->
+                <div class="owner-info">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" 
+                         class="owner-avatar">
+                    <span class="owner-name">Emma Johnson</span>
+                </div>
+            </div>
                  
             <!-- Pet Info Overlay -->
-            <div class="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-4">
+            <div class="p-4 bg-white">
                 <div class="flex items-center mb-2">
                     <h2 class="text-xl font-bold mr-2">Charlie</h2>
                     <div class="text-gray-500">3 years • Poodle</div>
                 </div>
                 
-                <div class="flex items-center mb-2">
-                    <i class="fas fa-map-marker-alt text-red-500 mr-1"></i>
-                    <span class="text-sm text-gray-600">1.2 km away</span>
+                <div class="mb-3">
+                    <span class="location-badge">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        1.2 km away
+                    </span>
                 </div>
                 
                 <p class="text-gray-700 text-sm">Friendly and energetic pup who loves to play fetch and go on long walks. Looking for playmates in the area!</p>
             </div>
-            
-            <!-- User Photo -->
-            <div class="absolute top-4 right-4 z-10">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" 
-                     class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm">
-            </div>
         </div>
         
         <!-- Action Buttons -->
-        <div class="flex justify-center space-x-4 mb-6">
-            <button class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center">
+        <div class="flex justify-center space-x-8 mb-8">
+            <button class="action-button bg-white">
                 <i class="fas fa-times text-red-500 text-2xl"></i>
             </button>
-            <button class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center">
+            <button class="action-button bg-white">
                 <i class="fas fa-heart text-green-500 text-2xl"></i>
             </button>
         </div>
         
         <!-- Matches Section -->
         <div class="mb-4">
-            <h2 class="subtitle mb-3">Recent Matches</h2>
-            <div class="flex overflow-x-auto space-x-4 pb-2 -mx-4 px-4">
+            <h2 class="text-lg font-bold mb-4">Recent Matches</h2>
+            <div class="flex overflow-x-auto space-x-4 pb-4">
                 <!-- Match 1 -->
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <div class="relative mb-1">
                         <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-16 h-16 rounded-full object-cover border-2 border-pet-primary">
-                        <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                             class="match-avatar">
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <span class="text-xs font-medium">Max</span>
                 </div>
@@ -95,8 +185,8 @@
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <div class="relative mb-1">
                         <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-16 h-16 rounded-full object-cover border-2 border-pet-primary">
-                        <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                             class="match-avatar">
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <span class="text-xs font-medium">Luna</span>
                 </div>
@@ -105,7 +195,7 @@
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <div class="relative mb-1">
                         <img src="https://images.unsplash.com/photo-1591946614720-90a587da4a36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-16 h-16 rounded-full object-cover border-2 border-pet-primary">
+                             class="match-avatar">
                     </div>
                     <span class="text-xs font-medium">Bella</span>
                 </div>
@@ -114,7 +204,7 @@
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <div class="relative mb-1">
                         <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-16 h-16 rounded-full object-cover border-2 border-gray-300">
+                             class="match-avatar">
                     </div>
                     <span class="text-xs font-medium">Coco</span>
                 </div>
@@ -123,7 +213,7 @@
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <div class="relative mb-1">
                         <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80" 
-                             class="w-16 h-16 rounded-full object-cover border-2 border-gray-300">
+                             class="match-avatar">
                     </div>
                     <span class="text-xs font-medium">Buddy</span>
                 </div>
@@ -137,19 +227,22 @@
             <i class="fas fa-home tab-icon"></i>
             <span>Home</span>
         </a>
-        <a href="community.html" class="tab-item">
-            <i class="fas fa-users tab-icon"></i>
-            <span>Community</span>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
         </a>
-        <a href="social.html" class="tab-item">
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item active">
             <i class="fas fa-camera tab-icon"></i>
             <span>Social</span>
         </a>
-        <a href="chat.html" class="tab-item">
-            <i class="fas fa-comment tab-icon"></i>
-            <span>Chat</span>
-        </a>
-        <a href="profile.html" class="tab-item">
+        <a href="user_profile.html" class="tab-item">
             <i class="fas fa-user tab-icon"></i>
             <span>Profile</span>
         </a>

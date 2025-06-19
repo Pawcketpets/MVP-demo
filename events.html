@@ -44,10 +44,11 @@
             color: #6B7280;
         }
         .event-tag {
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 9999px;
-            font-weight: 500;
+            display: inline-block;
+            font-size: 0.625rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
         }
         .tag-meetup {
             background-color: #DBEAFE;
@@ -102,6 +103,34 @@
         #all-events {
             min-height: calc(100vh - 220px); /* Accounts for header, tabs, filters, and tab bar */
         }
+        
+        .header-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+        
+        .header-link:hover {
+            color: #8B5CF6;
+        }
+        
+        .header-link-arrow {
+            margin-left: 6px;
+            font-size: 14px;
+        }
+        
+        .header-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -120,15 +149,20 @@
         <!-- Header -->
         <div class="flex-between mb-6">
             <div class="flex items-center h-10">
-                <h1 class="header-title">Social</h1>
+                <a href="match.html" class="header-link">
+                    <h1 class="header-title">Social</h1>
+                    <i class="fas fa-chevron-right header-link-arrow text-purple-500"></i>
+                </a>
             </div>
             <div class="flex items-center">
                 <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-2">
                     <i class="fas fa-search text-gray-500"></i>
                 </button>
-                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-bell text-gray-500"></i>
-                </button>
+                <a href="chat.html">
+                    <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-comment text-purple-500"></i>
+                    </button>
+                </a>
             </div>
         </div>
 
@@ -339,13 +373,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Floating Action Button -->
-        <div class="fixed bottom-28 right-4">
-            <button class="w-14 h-14 bg-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                <i class="fas fa-plus text-white text-xl"></i>
-            </button>
-        </div>
     </div>
 
     <!-- Tab Bar -->
@@ -354,19 +381,22 @@
             <i class="fas fa-home tab-icon"></i>
             <span>Home</span>
         </a>
-        <a href="community.html" class="tab-item">
-            <i class="fas fa-users tab-icon"></i>
-            <span>Community</span>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
         </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
         <a href="social.html" class="tab-item active">
             <i class="fas fa-camera tab-icon"></i>
             <span>Social</span>
         </a>
-        <a href="chat.html" class="tab-item">
-            <i class="fas fa-comment tab-icon"></i>
-            <span>Chat</span>
-        </a>
-        <a href="profile.html" class="tab-item">
+        <a href="user_profile.html" class="tab-item">
             <i class="fas fa-user tab-icon"></i>
             <span>Profile</span>
         </a>
@@ -374,34 +404,26 @@
 
     <script>
         function filterEvents(type) {
-            // Remove active class from all filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.remove('bg-purple-500', 'text-white');
-                btn.classList.add('bg-gray-100', 'text-gray-700');
-            });
+            // Get all filter buttons and remove active class
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Add active class to selected filter button
-            const selectedBtn = document.querySelector(`.filter-btn[onclick="filterEvents('${type}')"]`);
-            selectedBtn.classList.add('active');
-            selectedBtn.classList.remove('bg-gray-100', 'text-gray-700');
-            selectedBtn.classList.add('bg-purple-500', 'text-white');
-            
-            // Filter the events
-            const allEvents = document.querySelectorAll('.event-item');
+            // Add active class to clicked button
+            const clickedButton = document.querySelector(`[onclick="filterEvents('${type}')"]`);
+            clickedButton.classList.add('active');
             
             if (type === 'all') {
-                allEvents.forEach(event => {
-                    event.style.display = 'block';
-                });
+                // Show all events
+                const events = document.querySelectorAll('.event-item');
+                events.forEach(event => event.style.display = 'block');
             } else {
-                allEvents.forEach(event => {
-                    if (event.getAttribute('data-type') === type) {
-                        event.style.display = 'block';
-                    } else {
-                        event.style.display = 'none';
-                    }
-                });
+                // Hide all events
+                const allEvents = document.querySelectorAll('.event-item');
+                allEvents.forEach(event => event.style.display = 'none');
+                
+                // Show only events of selected type
+                const filteredEvents = document.querySelectorAll(`.event-item[data-type="${type}"]`);
+                filteredEvents.forEach(event => event.style.display = 'block');
             }
         }
     </script>
