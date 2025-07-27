@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcket - Pet Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Share Card Overlay Styles */
+        .share-card-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+        }
+        
+        .share-card-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding-bottom: 120px; /* Add extra padding to avoid tab bar */
+        }
+        
+        .share-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .share-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .close-share-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .share-card-content {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .share-card-header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .share-pet-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin: 0 auto 10px;
+        }
+        
+        .share-pet-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .share-pet-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .share-card-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .share-card-section:last-child {
+            border-bottom: none;
+        }
+        
+        .share-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-section-title i {
+            margin-right: 8px;
+            color: #8B5CF6;
+            font-size: 12px;
+        }
+        
+        .share-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .share-info-item {
+            background: #f9fafb;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border-left: 2px solid #8B5CF6;
+        }
+        
+        .share-info-label {
+            font-size: 10px;
+            color: #6b7280;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        
+        .share-info-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .share-vaccination-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .share-vaccination-item:last-child {
+            border-bottom: none;
+        }
+        
+        .share-vaccination-info h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 2px;
+        }
+        
+        .share-vaccination-info p {
+            font-size: 10px;
+            color: #6b7280;
+        }
+        
+        .share-vaccination-status {
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .share-status-valid {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .share-status-expiring {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .share-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 0 5px 20px 5px;
+            margin-bottom: 20px;
+        }
+        
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            flex: 1;
+            outline: none;
+        }
+        
+        .share-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .share-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            border: none;
+            outline: none;
+        }
+        
+        .share-icon.message {
+            background: #00C851;
+        }
+        
+        .share-icon.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .share-icon.x {
+            background: #000000;
+        }
+        
+        .share-icon.email {
+            background: #4285F4;
+        }
+        
+        .share-icon.messenger {
+            background: #0084FF;
+        }
+        
+        .share-option span {
+            font-size: 11px;
+            color: #6B7280;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .share-generated-date {
+            text-align: center;
+            padding: 10px 20px;
+            background: #f9fafb;
+            font-size: 10px;
+            color: #6b7280;
+            border-top: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Header with back button -->
+        <div class="flex items-center mb-6">
+            <a href="home.html" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                <i class="fas fa-arrow-left text-gray-500"></i>
+            </a>
+            <h1 class="title mb-0">Pet Profile</h1>
+        </div>
+
+        <!-- Pet Profile Header -->
+        <div class="card flex flex-col items-center p-6 mb-6">
+            <div class="relative mb-4">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                     class="pet-avatar-large">
+                <button class="absolute bottom-0 right-0 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center border border-gray-200">
+                    <i class="fas fa-camera text-gray-500"></i>
+                </button>
+            </div>
+            <h2 class="text-xl font-bold mb-1">Buddy</h2>
+            <p class="text-gray-500 text-sm mb-4">Golden Retriever • Male • 3 years</p>
+            <div class="flex space-x-2">
+                <button class="primary-button py-2 px-4 text-sm">
+                    <i class="fas fa-edit mr-2"></i>Edit Profile
+                </button>
+                <button class="secondary-button py-2 px-4 text-sm" onclick="generateShareCard()">
+                    <i class="fas fa-share-alt mr-2"></i>Share
+                </button>
+            </div>
+        </div>
+
+        <!-- Basic Information -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Basic Information</h3>
+            <div class="basic-info-container">
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Breed</p>
+                    <p class="basic-info-value breed">Golden Retriever</p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Gender</p>
+                    <p class="basic-info-value">Male</p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Age</p>
+                    <p class="basic-info-value age-weight">
+                        <span>3 years 2 months</span>
+                        <span class="value-unit">Born Mar 12, 2020</span>
+                    </p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Weight</p>
+                    <p class="basic-info-value age-weight">
+                        <span>32 kg</span>
+                        <span class="value-unit">Last updated: May 10, 2023</span>
+                    </p>
+                </div>
+                <div class="basic-info-item">
+                    <p class="basic-info-label">Microchip ID</p>
+                    <p class="basic-info-value microchip">985-1210-3328-4767</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Records -->
+        <div class="card mb-6">
+            <div class="flex-between mb-4">
+                <h3 class="subtitle mb-0">Health Records</h3>
+                <button class="text-sm font-medium pet-primary">Add New</button>
+            </div>
+            
+            <!-- Vaccination Records -->
+            <div class="mb-4">
+                <div class="flex-between mb-2">
+                    <h4 class="font-semibold">Vaccinations</h4>
+                    <button class="text-sm text-gray-500">See All</button>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg divide-y">
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Rabies Vaccine</p>
+                            <p class="text-sm text-gray-500">Apr 15, 2023</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full mr-2">Valid</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">DHPP Vaccine</p>
+                            <p class="text-sm text-gray-500">Jan 10, 2023</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full mr-2">Valid</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Bordetella Vaccine</p>
+                            <p class="text-sm text-gray-500">Nov 5, 2022</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-yellow-100 text-yellow-800 py-1 px-2 rounded-full mr-2">Expiring</span>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medical History -->
+            <div>
+                <div class="flex-between mb-2">
+                    <h4 class="font-semibold">Medical History</h4>
+                    <button class="text-sm text-gray-500">See All</button>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg divide-y">
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Annual Checkup</p>
+                            <p class="text-sm text-gray-500">Mar 20, 2023</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <div class="p-3 flex-between">
+                        <div>
+                            <p class="font-medium">Dental Cleaning</p>
+                            <p class="text-sm text-gray-500">Dec 12, 2022</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diet Information -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Diet Information</h3>
+            
+            <div class="mb-4">
+                <h4 class="font-semibold mb-2">Daily Food</h4>
+                <div class="diet-item">
+                    <div class="diet-info">
+                        <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=60&q=80" 
+                             class="diet-food-img">
+                        <div class="diet-food-details">
+                            <p class="diet-food-name">Premium Dry Dog Food</p>
+                            <p class="diet-food-brand">Royal Canin</p>
+                        </div>
+                    </div>
+                    <div class="diet-quantity">300g × 2</div>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-2">Allergies & Restrictions</h4>
+                <div class="allergies-container">
+                    <span class="allergy-tag severe">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Chicken
+                    </span>
+                    <span class="allergy-tag severe">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Wheat
+                    </span>
+                    <span class="allergy-tag moderate">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Dairy (Mild)
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Behavior & Training -->
+        <div class="card mb-6">
+            <h3 class="subtitle">Behavior & Training</h3>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="behavior-card">
+                    <div class="behavior-header">
+                        <div class="behavior-icon" style="background-color: #FFF9C4; color: #FBC02D;">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="behavior-title">Traits</p>
+                    </div>
+                    <div class="behavior-content-wrapper">
+                        <p class="behavior-content">Friendly, Gentle, Playful</p>
+                        <p class="behavior-description">Primary personality characteristics</p>
+                    </div>
+                </div>
+                
+                <div class="behavior-card training">
+                    <div class="behavior-header">
+                        <div class="behavior-icon" style="background-color: #E3F2FD; color: #2196F3;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <p class="behavior-title">Training</p>
+                    </div>
+                    <div class="behavior-content-wrapper">
+                        <p class="behavior-content">Intermediate Training Level</p>
+                        <p class="behavior-description">Obedience and skill development</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="behavior-card special-notes">
+                <div class="behavior-header">
+                    <div class="behavior-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <p class="behavior-title">Special Notes</p>
+                </div>
+                <div class="behavior-content-wrapper">
+                    <p class="behavior-content">Afraid of thunderstorms. Needs extra comfort during loud noises.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="virtual_pet.html" class="tab-item">
+            <i class="fas fa-paw tab-icon"></i>
+            <span>Virtual Pet</span>
+        </a>
+        <div class="tab-item">
+            <a href="post_menu.html">
+                <button class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center -mt-6 border-4 border-white transition-transform hover:scale-105">
+                    <i class="fas fa-plus text-white text-xl"></i>
+                </button>
+            </a>
+        </div>
+        <a href="social.html" class="tab-item">
+            <i class="fas fa-camera tab-icon"></i>
+            <span>Social</span>
+        </a>
+        <a href="user_profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <!-- Share Card Overlay -->
+    <div id="shareCardOverlay" class="share-card-overlay">
+        <div class="share-card-container">
+            <!-- Share Card Header -->
+            <div class="share-card-header">
+                <h3 class="share-card-title">Share Card</h3>
+                <button onclick="closeShareCard()" class="close-share-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Share Card Content -->
+            <div class="share-card-content" id="shareCardContent">
+                <!-- Card Header -->
+                <div class="share-card-header-section">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                         alt="Buddy" class="share-pet-avatar">
+                    <h2 class="share-pet-name">Buddy</h2>
+                    <p class="share-pet-info">Golden Retriever • Male • 3 years</p>
+                </div>
+
+                <!-- Basic Information -->
+                <div class="share-card-section">
+                    <h3 class="share-section-title">
+                        <i class="fas fa-info-circle"></i>
+                        Basic Information
+                    </h3>
+                    <div class="share-info-grid">
+                        <div class="share-info-item">
+                            <div class="share-info-label">Breed</div>
+                            <div class="share-info-value">Golden Retriever</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Gender</div>
+                            <div class="share-info-value">Male</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Age</div>
+                            <div class="share-info-value">3 years 2 months</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Weight</div>
+                            <div class="share-info-value">32 kg</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Records -->
+                <div class="share-card-section">
+                    <h3 class="share-section-title">
+                        <i class="fas fa-heartbeat"></i>
+                        Health Records
+                    </h3>
+                    <div>
+                        <div class="share-vaccination-item">
+                            <div class="share-vaccination-info">
+                                <h4>Rabies Vaccine</h4>
+                                <p>Apr 15, 2023</p>
+                            </div>
+                            <span class="share-vaccination-status share-status-valid">Valid</span>
+                        </div>
+                        <div class="share-vaccination-item">
+                            <div class="share-vaccination-info">
+                                <h4>DHPP Vaccine</h4>
+                                <p>Jan 10, 2023</p>
+                            </div>
+                            <span class="share-vaccination-status share-status-valid">Valid</span>
+                        </div>
+                        <div class="share-vaccination-item">
+                            <div class="share-vaccination-info">
+                                <h4>Bordetella Vaccine</h4>
+                                <p>Nov 5, 2022</p>
+                            </div>
+                            <span class="share-vaccination-status share-status-expiring">Expiring</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Records -->
+                <div class="share-card-section">
+                    <h3 class="share-section-title">
+                        <i class="fas fa-stethoscope"></i>
+                        Medical Records
+                    </h3>
+                    <div class="share-info-grid">
+                        <div class="share-info-item">
+                            <div class="share-info-label">Last Checkup</div>
+                            <div class="share-info-value">Mar 20, 2023</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Next Checkup</div>
+                            <div class="share-info-value">Mar 20, 2024</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Blood Type</div>
+                            <div class="share-info-value">DEA 1.1 Negative</div>
+                        </div>
+                        <div class="share-info-item">
+                            <div class="share-info-label">Allergies</div>
+                            <div class="share-info-value">Chicken, Wheat</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generated Date -->
+                <div class="share-generated-date">
+                    Generated on <span id="shareCurrentDate"></span>
+                </div>
+            </div>
+
+            <!-- Share Options -->
+            <div class="share-options">
+                <button class="share-option" onclick="shareToMessage()">
+                    <div class="share-icon message">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <span>Message</span>
+                </button>
+                <button class="share-option" onclick="shareToInstagram()">
+                    <div class="share-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span>Instagram</span>
+                </button>
+                <button class="share-option" onclick="shareToX()">
+                    <div class="share-icon x">
+                        <i class="fab fa-x-twitter"></i>
+                    </div>
+                    <span>X</span>
+                </button>
+                <button class="share-option" onclick="shareToEmail()">
+                    <div class="share-icon email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span>Email</span>
+                </button>
+                <button class="share-option" onclick="shareToMessenger()">
+                    <div class="share-icon messenger">
+                        <i class="fab fa-facebook-messenger"></i>
+                    </div>
+                    <span>Messenger</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate share card function
+        function generateShareCard() {
+            // Set current date
+            document.getElementById('shareCurrentDate').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Show share card overlay
+            document.getElementById('shareCardOverlay').style.display = 'block';
+        }
+        
+        // Close share card function
+        function closeShareCard() {
+            document.getElementById('shareCardOverlay').style.display = 'none';
+        }
+        
+        // Share functions for different platforms
+        function shareToMessage() {
+            const text = 'Check out Buddy\'s profile from Pawcket!';
+            const url = window.location.href;
+            const message = `${text} ${url}`;
+            const mailtoLink = `sms:?body=${encodeURIComponent(message)}`;
+            window.open(mailtoLink);
+        }
+        
+        function shareToInstagram() {
+            alert('Sharing to Instagram...');
+            // In a real app, this would integrate with Instagram API
+        }
+        
+        function shareToX() {
+            const text = 'Check out Buddy\'s profile from Pawcket!';
+            const url = window.location.href;
+            const message = `${text} ${url}`;
+            const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+            window.open(twitterLink);
+        }
+        
+        function shareToEmail() {
+            const subject = 'Buddy\'s Profile from Pawcket';
+            const body = 'Check out Buddy\'s profile from Pawcket!';
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+        }
+        
+        function shareToMessenger() {
+            const text = 'Check out Buddy\'s profile from Pawcket!';
+            const url = window.location.href;
+            const message = `${text} ${url}`;
+            const messengerLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+            window.open(messengerLink);
+        }
+        
+        // Close overlay when clicking outside
+        document.getElementById('shareCardOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareCard();
+            }
+        });
+    </script>
+</body>
+</html> 
